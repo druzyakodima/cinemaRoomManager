@@ -15,11 +15,7 @@ public class CinemaRoomManager {
     static int countByTicket = 0;
     static float hundred = 100;
     static float percentageSeatOccupancy;
-    static int currentIncome;
     static int sumCurrentIncome = 0;
-    static int totalIncome;
-    static int setPlace;
-    static int halfRows;
 
     public static void main(String[] args) {
         initMap(arr);
@@ -107,11 +103,11 @@ public class CinemaRoomManager {
         System.out.printf("Number of purchased tickets: %d\n" +
                 "Percentage: %.2f%%\n" +
                 "Current income: $%d\n" +
-                "Total income: $%d\n", countByTicket, percentageSeatOccupancy, sumCurrentIncome, totalIncome);
+                "Total income: $%d\n", countByTicket, percentageSeatOccupancy, sumCurrentIncome, totalIncomeMethod());
     }
 
-    public static void totalIncomeMethod() {
-        totalIncome = countRows * countSeats < 60 ? (countRows * countSeats) * 10 : (((countRows / 2) * countSeats) * 10) + ((countRows - (countRows / 2)) * countSeats * 8);
+    public static int totalIncomeMethod() {
+        return countRows * countSeats < 60 ? (countRows * countSeats) * 10 : (((countRows / 2) * countSeats) * 10) + ((countRows - (countRows / 2)) * countSeats * 8);
     }
 
     private static void checkingAmountSpace(int countRows, int rowNumber, int countSeats, int seatNumber) {
@@ -133,12 +129,13 @@ public class CinemaRoomManager {
     }
 
     public static void priceTicket(int countRows, int countSeats, int rowNumber) {
-        setPlace = countRows * countSeats;
-        halfRows = countRows / 2;
-        currentIncome = rowNumber <= halfRows || setPlace < 60 ? 10 : 8;
+        int setPlace = countRows * countSeats;
+        int halfRows = countRows / 2;
+        int currentIncome = rowNumber <= halfRows || setPlace < 60 ? 10 : 8;
         sumCurrentIncome += currentIncome;
         String priceTicket = "Ticket price: $" + currentIncome;
         System.out.println(priceTicket);
         bySeveralTicket();
+
     }
 }
